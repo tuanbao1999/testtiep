@@ -1,0 +1,5 @@
+com\example\demo\application\response\ResponseToken.class
+com\example\demo\DemoApplication.class
+com\example\demo\application\config\RestTemplateConfig.class
+com\example\demo\application\controller\AdminController.class
+com\example\demo\application\request\RequestLogin.class
