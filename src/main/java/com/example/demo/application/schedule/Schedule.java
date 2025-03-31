@@ -16,7 +16,7 @@ public class Schedule {
     private final RestTemplate restTemplate;
 
     // Chạy mỗi 30 giây
-    @Scheduled(fixedRate = 600000)
+    @Scheduled(cron = "10 * * * * ?")
     public void scheduleFixedRateTask() {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
