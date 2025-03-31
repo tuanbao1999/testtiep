@@ -48,4 +48,9 @@ public class AdminController {
               .body(new HashMap<>());
     }
   }
+
+  @GetMapping("/reload")
+  public ResponseEntity<Void> reload() {
+    return ResponseEntity.ok().build();
+  }
 }
