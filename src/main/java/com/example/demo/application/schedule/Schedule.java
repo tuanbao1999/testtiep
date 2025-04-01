@@ -18,6 +18,7 @@ public class Schedule {
     // Chạy mỗi 30 giây
     @Scheduled(cron = "0 * * * * ?")
     public void scheduleFixedRateTask() {
+        System.out.println("đã vào");
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>("", headers);
@@ -27,6 +28,6 @@ public class Schedule {
                 request,
                 Object.class
         );
-        System.out.println("đã vào");
+
     }
 }
