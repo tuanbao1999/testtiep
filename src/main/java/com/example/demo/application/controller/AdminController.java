@@ -50,7 +50,7 @@ public class AdminController {
   }
 
   @GetMapping("/reload")
-  public ResponseEntity<Void> reload() {
-    return ResponseEntity.ok().build();
+  public ResponseEntity<Integer> reload() {
+    return ResponseEntity.ok().body(null);
   }
 }
