@@ -1,10 +1,7 @@
 package com.example.demo.application.controller;
 
 import com.example.demo.application.request.RequestLogin;
-import com.example.demo.application.response.ResponseToken;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -21,6 +17,7 @@ public class AdminController {
 
 
   private static final String LOGIN_API_URL = "https://ddc.fis.vn/fis0/api/login";
+  private static final String TOKEN_API_URL = "https://googleads.g.doubleclick.net/pagead/id";
 
   private final RestTemplate restTemplate;
 
@@ -52,9 +49,24 @@ public class AdminController {
   }
 
   @GetMapping("/reload")
-  public ResponseEntity<Object> reload() {
-    ResponseToken responseToken = new ResponseToken();
-    responseToken.setEtmsToken("<PASSWORD>");
-    return ResponseEntity.ok().body(responseToken);
+  public ResponseEntity<String> reload() {
+    HttpHeaders headers = new HttpHeaders();
+    headers.setContentType(MediaType.APPLICATION_JSON);
+
+    HttpEntity<Void> request = new HttpEntity<>(headers);
+
+    try {
+      ResponseEntity<String> response = restTemplate.exchange(
+              TOKEN_API_URL,
+              HttpMethod.GET,
+              request,
+              String.class
+      );
+      return response;
+    } catch (Exception e) {
+      // Handle errors appropriately
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+              .body(null);
+    }
   }
 }
