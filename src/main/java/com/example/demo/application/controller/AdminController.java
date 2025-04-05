@@ -48,7 +48,7 @@ public class AdminController {
     }
   }
 
-  @GetMapping("/reload")
+  @GetMapping("/gen-api")
   public ResponseEntity<String> reload() {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);

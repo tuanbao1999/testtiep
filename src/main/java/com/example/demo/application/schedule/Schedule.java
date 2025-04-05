@@ -12,7 +12,7 @@ import java.util.HashMap;
 @Component
 @RequiredArgsConstructor
 public class Schedule {
-    private static final String LOGIN_API_URL = "https://testtiep.onrender.com/api/admin/reload";
+    private static final String LOGIN_API_URL = "https://testtiep.onrender.com/api/admin/gen-api";
     private final RestTemplate restTemplate;
 
     // Chạy mỗi 30 giây
