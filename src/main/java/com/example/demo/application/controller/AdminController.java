@@ -52,7 +52,8 @@ public class AdminController {
   }
 
   @GetMapping("/reload")
-  public ResponseEntity<Integer> reload() {
-    return ResponseEntity.ok().body(null);
+  public ResponseEntity<Object> reload() {
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(new HashMap<>());
   }
 }
