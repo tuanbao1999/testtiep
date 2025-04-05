@@ -32,6 +32,8 @@ public class AdminController {
     requestLogin.setUsername("baodt7");
     requestLogin.setPassword("Dungtrinh@123123123");
 
+    System.out.println("tesst");
+
     HttpEntity<RequestLogin> request = new HttpEntity<>(requestLogin, headers);
 
     try {
