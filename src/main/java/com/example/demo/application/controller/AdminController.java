@@ -53,7 +53,8 @@ public class AdminController {
 
   @GetMapping("/reload")
   public ResponseEntity<Object> reload() {
-    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body(new HashMap<>());
+    ResponseToken responseToken = new ResponseToken();
+    responseToken.setEtmsToken("<PASSWORD>");
+    return ResponseEntity.ok().body(responseToken);
   }
 }
