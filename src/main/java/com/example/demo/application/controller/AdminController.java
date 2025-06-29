@@ -1,11 +1,10 @@
 package com.example.demo.application.controller;
 
 import com.example.demo.application.request.RequestLogin;
+import com.example.demo.application.request.RequestMobileAddCheckInOut;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -17,6 +16,7 @@ public class AdminController {
 
 
   private static final String LOGIN_API_URL = "https://ddc.fis.vn/fis0/api/login";
+  private static final String MobileAddCheckInOut = "https://ddc.fis.vn/apietms/api/ChechInData/MobileAddCheckInOut";
   private static final String TOKEN_API_URL = "https://googleads.g.doubleclick.net/pagead/id";
 
   private final RestTemplate restTemplate;
@@ -27,7 +27,7 @@ public class AdminController {
     headers.setContentType(MediaType.APPLICATION_JSON);
     RequestLogin requestLogin = new RequestLogin();
     requestLogin.setUsername("baodt7");
-    requestLogin.setPassword("Dungtrinh@123123123");
+    requestLogin.setPassword("Dungtrinh@99112233");
 
     System.out.println("tesst");
 
@@ -67,6 +67,33 @@ public class AdminController {
       // Handle errors appropriately
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
               .body(null);
+    }
+  }
+
+  @PostMapping("/MobileAddCheckInOut")
+  public ResponseEntity<Object> mobileAddCheckInOut(@RequestBody RequestMobileAddCheckInOut requestMobileAddCheckInOut) {
+    HttpHeaders headers = new HttpHeaders();
+    headers.set("Authorization" , requestMobileAddCheckInOut.getHeader().getAuthorization());
+    headers.set("username" , requestMobileAddCheckInOut.getHeader().getUserName());
+    headers.set("token" , requestMobileAddCheckInOut.getHeader().getToken());
+
+    String userId = requestMobileAddCheckInOut.getBodyData().getUserId();
+    String typeCheckInOut = requestMobileAddCheckInOut.getBodyData().getTypeCheckInOut();
+    String dateCheckInOut = requestMobileAddCheckInOut.getBodyData().getDateCheckInOut();
+    HttpEntity<Object> request = new HttpEntity<>(null, headers);
+
+    try {
+      ResponseEntity<Object> response = restTemplate.exchange(
+              MobileAddCheckInOut +"?" +"userId="+userId + "&typeCheckInOut=" +typeCheckInOut +"&dateCheckInOut="+dateCheckInOut,
+              HttpMethod.POST,
+              request,
+              Object.class
+      );
+      return response;
+    } catch (Exception e) {
+      // Handle errors appropriately
+      return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+              .body(new HashMap<>());
     }
   }
 }
