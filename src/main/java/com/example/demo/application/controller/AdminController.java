@@ -21,13 +21,10 @@ public class AdminController {
 
   private final RestTemplate restTemplate;
 
-  @GetMapping("/get-token")
-  public ResponseEntity<Object> getToken() {
+  @PostMapping("/get-token")
+  public ResponseEntity<Object> getToken(@RequestBody RequestLogin requestLogin) {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
-    RequestLogin requestLogin = new RequestLogin();
-    requestLogin.setUsername("baodt7");
-    requestLogin.setPassword("Dungtrinh@99112233");
 
     System.out.println("tesst");
 
