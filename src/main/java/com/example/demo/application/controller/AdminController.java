@@ -37,7 +37,9 @@ public class AdminController {
               request,
               Object.class
       );
-      return response;
+      return ResponseEntity.status(response.getStatusCode())
+              .headers(new HttpHeaders()) // hoặc thêm header tùy ý
+              .body(response.getBody());
     } catch (Exception e) {
       // Handle errors appropriately
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
