@@ -1,5 +1,11 @@
 com\example\demo\application\response\ResponseToken.class
 com\example\demo\DemoApplication.class
 com\example\demo\application\config\RestTemplateConfig.class
+com\example\demo\application\request\RequestMobileAddCheckInOut$BodyData.class
+com\example\demo\application\config\WebConfig.class
+com\example\demo\application\request\RequestMobileAddCheckInOut$Header.class
+com\example\demo\application\request\RequestMobileAddCheckInOut.class
+com\example\demo\application\schedule\Schedule.class
 com\example\demo\application\controller\AdminController.class
 com\example\demo\application\request\RequestLogin.class
+com\example\demo\application\config\WebConfig$1.class
