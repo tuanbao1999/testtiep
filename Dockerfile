@@ -1,17 +1,22 @@
-# Sử dụng JDK base image
-FROM openjdk:17-jdk-slim
+# Stage 1: Build app với Maven
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
-# Thông tin về maintainer
-LABEL maintainer="your-email@example.com"
-
-# Tạo thư mục để chứa ứng dụng
 WORKDIR /app
 
-# Copy file JAR từ target vào container
-COPY target/*.jar app.jar
+# Copy toàn bộ source code vào container
+COPY . .
 
-# Port mà ứng dụng Spring Boot sẽ chạy
+# Build project (tạo file JAR)
+RUN mvn clean install -DskipTests
+
+# Stage 2: Chạy app với JDK base image
+FROM openjdk:17-jdk-slim
+
+WORKDIR /app
+
+# Copy file JAR từ stage build sang
+COPY --from=build /app/target/*.jar app.jar
+
 EXPOSE 8080
 
-# Command để chạy ứng dụng
-ENTRYPOINT ["java","-jar","/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
