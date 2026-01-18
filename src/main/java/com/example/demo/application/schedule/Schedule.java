@@ -15,7 +15,7 @@ public class Schedule {
     private static final String LOGIN_API_URL = "https://testtiep.onrender.com/api/admin/gen-api";
     private final RestTemplate restTemplate;
 
-    Chạy mỗi 30 giây
+    // Chạy mỗi 30 giây
    @Scheduled(cron = "0 * * * * ?")
    public void scheduleFixedRateTask() {
        System.out.println("đã vào");
